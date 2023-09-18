@@ -75,8 +75,7 @@ namespace Bluetooth_Joystick_Test
 
         private void ReadReceivedData(byte[] receivedBytes_Raw) //ASMohsen
         {
-            //RegistryKey key = Registry.LocalMachine.OpenSubKey("HARDWARE\\DEVICEMAP\\SERIALCOMM")
-            //Microsoft.Win32.Registry.LocalMachine.OpenSubKey("\\Device\\BthModem0");
+
             switch (serial_Mode)
             {
                 case "Detection":
@@ -282,61 +281,70 @@ namespace Bluetooth_Joystick_Test
 
         private void button_connect_Click(object sender, EventArgs e)
         {
-            bool isPortCorrect = true;
-            byte[] autoDetectionPacket = new byte[8] { 0x00, 0xAA, 0x55, 0x00, 0x00, 0x00, 0x00, 0xFF };
-            byte[] rxBytes = new byte[8];
-            foreach (string port in SerialPort.GetPortNames())
-            {
-                serialBT.Close();
-                textBox_COMPort.Text = port;
-                serialBT.PortName = port;
-                try
-                {
-                    serialBT.ReadTimeout = 10000;
-                    serialBT.WriteTimeout = 10000;
-                    serialBT.Open();
-                }
-                catch (System.Exception)
-                {
-                    continue;
-                }
-                if (serialBT.IsOpen)
-                {
-                    try
-                    {
-                        serialBT.Write(autoDetectionPacket, 0, autoDetectionPacket.Length);
-                    }
-                    catch (System.Exception)
-                    { }
-                    Thread.Sleep(5);
-                    try
-                    {
-                        serialBT.Read(rxBytes, 0, rxBytes.Length);
-                    }
-                    catch (System.Exception)
-                    { }
-                }
-                for (int i = 0; i < 8; i++)
-                {
-                    if (rxBytes[i] != autoDetectionPacket[i])
-                    {
-                        isPortCorrect = false;
-                        break;
-                    }
-                    else
-                        continue;
-                }
-                if (isPortCorrect)
-                {
-                    textBox_COMPort.Text = port;
-                    break;
-                }
-            }
+            
+            //bool isPortCorrect = true;
+            //byte[] autoDetectionPacket = new byte[8] { 0x00, 0xAA, 0x55, 0x00, 0x00, 0x00, 0x00, 0xFF };
+            //byte[] rxBytes = new byte[8];
+            //foreach (string port in SerialPort.GetPortNames())
+            //{
+            //    serialBT.Close();
+            //    textBox_COMPort.Text = port;
+            //    serialBT.PortName = port;
+            //    try
+            //    {
+            //        serialBT.ReadTimeout = 10000;
+            //        serialBT.WriteTimeout = 10000;
+            //        serialBT.Open();
+            //    }
+            //    catch (System.Exception)
+            //    {
+            //        continue;
+            //    }
+            //    if (serialBT.IsOpen)
+            //    {
+            //        try
+            //        {
+            //            serialBT.Write(autoDetectionPacket, 0, autoDetectionPacket.Length);
+            //        }
+            //        catch (System.Exception)
+            //        { }
+            //        Thread.Sleep(5);
+            //        try
+            //        {
+            //            serialBT.Read(rxBytes, 0, rxBytes.Length);
+            //        }
+            //        catch (System.Exception)
+            //        { }
+            //    }
+            //    for (int i = 0; i < 8; i++)
+            //    {
+            //        if (rxBytes[i] != autoDetectionPacket[i])
+            //        {
+            //            isPortCorrect = false;
+            //            break;
+            //        }
+            //        else
+            //            continue;
+            //    }
+            //    if (isPortCorrect)
+            //    {
+            //        textBox_COMPort.Text = port;
+            //        break;
+            //    }
+            //}
             if (!(serialBT.IsOpen))
             {
+                RegistryKey key = Registry.LocalMachine.OpenSubKey("HARDWARE\\DEVICEMAP\\SERIALCOMM");
+                object portReg;
+                if (key != null)
+                {
+                    portReg = key.GetValue("\\Device\\BthModem0");
+                    serialBT.PortName = portReg.ToString();
+                    textBox_COMPort.Text = portReg.ToString();
+                }
                 try
                 {
-                    serialBT.PortName = textBox_COMPort.Text;
+                    //serialBT.PortName = textBox_COMPort.Text;
                     serialBT.Open();
                     commandPacket[COMMAND_BYTE_INDEX] = CMD_TRANSMIT_RATE;
                     commandPacket[COMMAND_BYTE_INDEX + 1] = (byte)int.Parse(textBox_samplingRate.Text);

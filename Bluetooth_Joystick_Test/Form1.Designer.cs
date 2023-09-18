@@ -94,7 +94,6 @@
             this.label_YOut = new System.Windows.Forms.Label();
             this.label_ZOut = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button_autoDetectCOMPort = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox_COMPort
@@ -713,21 +712,11 @@
             this.label_ZOut.TabIndex = 20;
             this.label_ZOut.Text = "Zout";
             // 
-            // button_autoDetectCOMPort
-            // 
-            this.button_autoDetectCOMPort.Location = new System.Drawing.Point(223, 452);
-            this.button_autoDetectCOMPort.Name = "button_autoDetectCOMPort";
-            this.button_autoDetectCOMPort.Size = new System.Drawing.Size(126, 23);
-            this.button_autoDetectCOMPort.TabIndex = 21;
-            this.button_autoDetectCOMPort.Text = "Auto Detect Port";
-            this.button_autoDetectCOMPort.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 522);
-            this.Controls.Add(this.button_autoDetectCOMPort);
             this.Controls.Add(this.label_ZOut);
             this.Controls.Add(this.label_YOut);
             this.Controls.Add(this.label_XOut);
@@ -864,7 +853,6 @@
         private System.Windows.Forms.Label label_YOut;
         private System.Windows.Forms.Label label_ZOut;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button button_autoDetectCOMPort;
     }
 }
 
