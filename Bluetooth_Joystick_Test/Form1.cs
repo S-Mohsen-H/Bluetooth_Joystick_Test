@@ -279,7 +279,50 @@ namespace Bluetooth_Joystick_Test
 
             //}
         }
+        //private void DetectSerialPort()
+        //{
+        //    // 
+        //    // serialPort
+        //    // 
+        //    serial_Mode = "Detection";
+        //    if (serialBT != null)
+        //    {
+        //        serialBT.Dispose();
+        //    }
+        //    serialBT = new System.IO.Ports.SerialPort(/*this.components*/);
+        //    serialBT.ReceivedBytesThreshold = detection_DeviceSentBytes.Length;
+        //    serialBT.BaudRate = 115200;
+        //    serialBT.DataBits = 8;
+        //    serialBT.Parity = Parity.None;
+        //    serialBT.StopBits = StopBits.One;
+        //    serialBT.ReadBufferSize = 8192;
+        //    serialBT.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(serialPort1_DataReceived);
 
+        //    //if (serialPort.IsOpen)
+        //    //{
+        //    //    serialPort.Close();
+        //    //}
+        //    string[] portNames = SerialPort.GetPortNames();
+        //    string s = "";
+        //    for (int i = 0; i < portNames.Length; i++)
+        //    {
+        //        s += portNames[i] + ", ";
+        //    }
+        //    labelCOMStatus.Text = "Detected COM ports: " + s;
+        //    portIndex = 0;
+        //    dataReceivedInSerialPort = false;
+        //    if (portNames.Length != 0)
+        //    {
+        //        timerAutoDetectPort.Start();
+        //    }
+        //    else
+        //    {
+        //        buttonStatus.Enabled = true;
+        //        buttonStatus.Text = "Try Again";
+        //        labelCOMStatus.Text = "No serial port is detected on this machin";
+        //        buttonStatus.BackColor = Color.Red;
+        //    }
+        //}
         private void button_connect_Click(object sender, EventArgs e)
         {
             bool isPortCorrect = true;
