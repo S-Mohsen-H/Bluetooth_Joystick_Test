@@ -493,10 +493,10 @@ namespace Bluetooth_Joystick_Test
                 else if (sender.Equals(button_alarmBin))
                 {
                     commandPacket[COMMAND_BYTE_INDEX] = CMD_ALARM;
-                    commandPacket[COMMAND_BYTE_INDEX + 1] = (byte)Convert.ToInt16(textBox_alarmPatternBin.Text, 2);
-                    commandPacket[COMMAND_BYTE_INDEX + 2] = (byte)(Convert.ToInt16(textBox_alarmPatternBin.Text, 2) >> 8);
-                    commandPacket[COMMAND_BYTE_INDEX + 3] = (byte)(Convert.ToInt16(textBox_alarmPatternBin.Text, 2) >> 16);
-                    commandPacket[COMMAND_BYTE_INDEX + 4] = (byte)(Convert.ToInt16(textBox_alarmPatternBin.Text, 2) >> 24);
+                    commandPacket[COMMAND_BYTE_INDEX + 1] = (byte)Convert.ToInt32(textBox_alarmPatternBin.Text, 2);
+                    commandPacket[COMMAND_BYTE_INDEX + 2] = (byte)(Convert.ToInt32(textBox_alarmPatternBin.Text, 2) >> 8);
+                    commandPacket[COMMAND_BYTE_INDEX + 3] = (byte)(Convert.ToInt32(textBox_alarmPatternBin.Text, 2) >> 16);
+                    commandPacket[COMMAND_BYTE_INDEX + 4] = (byte)(Convert.ToInt32(textBox_alarmPatternBin.Text, 2) >> 24);
                     commandPacket[COMMAND_BYTE_INDEX + 5] = (byte)int.Parse(comboBox_alarmCountBin.Text);
 
                     serialBT.Write(commandPacket, 0, COMMAND_PACKET_SIZE);
@@ -504,10 +504,10 @@ namespace Bluetooth_Joystick_Test
                 else if (sender.Equals(button_alarmHex))
                 {
                     commandPacket[COMMAND_BYTE_INDEX] = CMD_ALARM;
-                    commandPacket[COMMAND_BYTE_INDEX + 1] = (byte)Convert.ToInt16(textBox_alarmPatternHex.Text, 16);
-                    commandPacket[COMMAND_BYTE_INDEX + 2] = (byte)(Convert.ToInt16(textBox_alarmPatternHex.Text, 16) >> 8);
-                    commandPacket[COMMAND_BYTE_INDEX + 3] = (byte)(Convert.ToInt16(textBox_alarmPatternHex.Text, 16) >> 16);
-                    commandPacket[COMMAND_BYTE_INDEX + 4] = (byte)(Convert.ToInt16(textBox_alarmPatternHex.Text, 16) >> 24);
+                    commandPacket[COMMAND_BYTE_INDEX + 1] = (byte)Convert.ToInt32(textBox_alarmPatternHex.Text, 16);
+                    commandPacket[COMMAND_BYTE_INDEX + 2] = (byte)(Convert.ToInt32(textBox_alarmPatternHex.Text, 16) >> 8);
+                    commandPacket[COMMAND_BYTE_INDEX + 3] = (byte)(Convert.ToInt32(textBox_alarmPatternHex.Text, 16) >> 16);
+                    commandPacket[COMMAND_BYTE_INDEX + 4] = (byte)(Convert.ToInt32(textBox_alarmPatternHex.Text, 16) >> 24);
                     commandPacket[COMMAND_BYTE_INDEX + 5] = (byte)int.Parse(comboBox_alarmCountHex.Text);
 
                     serialBT.Write(commandPacket, 0, COMMAND_PACKET_SIZE);
