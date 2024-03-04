@@ -129,7 +129,10 @@ namespace Bluetooth_Joystick_Test
                 joystickChart.X_Input = joystick_X_Input - 2048;
                 joystickChart.Y_Input = joystick_Y_Input - 2048;
                 joystickChart.Z_Input = joystick_Z_Input - 2048;
+                for (int i = 0;i<16;i++)
+                {
 
+                }
 
                 //for (int i = 0; i < serialBT.ReceivedBytesThreshold; i++)
                 //{
@@ -500,26 +503,66 @@ namespace Bluetooth_Joystick_Test
         {
 
         }
-        private bool ledState = true;
+        private bool led1State = true;
+        private bool led2State = true;
+        private bool led3State = true;
         private void button_LED_Click(object sender, EventArgs e)
         {
+            
             if (serialBT.IsOpen)
             {
 
                 commandPacket[COMMAND_BYTE_INDEX] = CMD_LED;
-                if (ledState)
+                if(sender == button_LED1)
                 {
-                    commandPacket[COMMAND_BYTE_INDEX + 1] = 1;
-                    button_LED.BackColor = Color.Green;
-                }
-                else
-                {
-                    commandPacket[COMMAND_BYTE_INDEX + 1] = 0;
-                    button_LED.BackColor = SystemColors.Control;
+                    if (led1State)
+                    {
+                        commandPacket[COMMAND_BYTE_INDEX + 1] |= 1;
+                        button_LED1.BackColor = Color.Green;
+
+                    }
+                    else
+                    {
+                        commandPacket[COMMAND_BYTE_INDEX + 1] &= 0xFE;
+                        button_LED1.BackColor = SystemColors.Control;
+                    }
+                    led1State = !led1State;
 
                 }
+                else if (sender == button_LED2)
+                {
+                    if (led2State)
+                    {
+                        commandPacket[COMMAND_BYTE_INDEX + 1] |= (1<<1);
+                        button_LED2.BackColor = Color.Green;
+
+                    }
+                    else
+                    {
+                        commandPacket[COMMAND_BYTE_INDEX + 1] &= 0xFD;
+                        button_LED2.BackColor = SystemColors.Control;
+                    }
+                    led2State = !led2State;
+
+                }
+                else if (sender == button_LED3)
+                {
+                    if (led2State)
+                    {
+                        commandPacket[COMMAND_BYTE_INDEX + 1] |= (1 << 2);
+                        button_LED3.BackColor = Color.Green;
+
+                    }
+                    else
+                    {
+                        commandPacket[COMMAND_BYTE_INDEX + 1] &= 0xFB;
+                        button_LED3.BackColor = SystemColors.Control;
+                    }
+                    led3State = !led3State;
+
+                }
+
                 serialBT.Write(commandPacket, 0, COMMAND_PACKET_SIZE);
-                ledState = !ledState;
 
             }
         }
