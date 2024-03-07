@@ -113,6 +113,8 @@
             this.Label_rxBytes = new System.Windows.Forms.Label();
             this.button_LED1 = new System.Windows.Forms.Button();
             this.button_LED3 = new System.Windows.Forms.Button();
+            this.checkBox_autoDetect = new System.Windows.Forms.CheckBox();
+            this.label_batteryLevel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox_COMPort
@@ -122,7 +124,7 @@
             this.textBox_COMPort.Name = "textBox_COMPort";
             this.textBox_COMPort.Size = new System.Drawing.Size(100, 27);
             this.textBox_COMPort.TabIndex = 1;
-            this.textBox_COMPort.Text = "COM11";
+            this.textBox_COMPort.Text = "COM5";
             this.textBox_COMPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button_connect
@@ -906,11 +908,31 @@
             this.button_LED3.UseVisualStyleBackColor = false;
             this.button_LED3.Click += new System.EventHandler(this.button_LED_Click);
             // 
+            // checkBox_autoDetect
+            // 
+            this.checkBox_autoDetect.AutoSize = true;
+            this.checkBox_autoDetect.Location = new System.Drawing.Point(607, 453);
+            this.checkBox_autoDetect.Name = "checkBox_autoDetect";
+            this.checkBox_autoDetect.Size = new System.Drawing.Size(80, 17);
+            this.checkBox_autoDetect.TabIndex = 37;
+            this.checkBox_autoDetect.Text = "checkBox2";
+            this.checkBox_autoDetect.UseVisualStyleBackColor = true;
+            // 
+            // label_batteryLevel
+            // 
+            this.label_batteryLevel.AutoSize = true;
+            this.label_batteryLevel.Location = new System.Drawing.Point(535, 37);
+            this.label_batteryLevel.Name = "label_batteryLevel";
+            this.label_batteryLevel.Size = new System.Drawing.Size(65, 13);
+            this.label_batteryLevel.TabIndex = 20;
+            this.label_batteryLevel.Text = "Battery ADC";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 522);
+            this.Controls.Add(this.checkBox_autoDetect);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
@@ -929,6 +951,7 @@
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label_ZOut);
             this.Controls.Add(this.label_YOut);
+            this.Controls.Add(this.label_batteryLevel);
             this.Controls.Add(this.label_XOut);
             this.Controls.Add(this.comboBox_alarmCountHex);
             this.Controls.Add(this.comboBox_alarmCountBin);
@@ -1085,6 +1108,8 @@
         private System.Windows.Forms.Label Label_rxBytes;
         private System.Windows.Forms.Button button_LED1;
         private System.Windows.Forms.Button button_LED3;
+        private System.Windows.Forms.CheckBox checkBox_autoDetect;
+        private System.Windows.Forms.Label label_batteryLevel;
     }
 }
 

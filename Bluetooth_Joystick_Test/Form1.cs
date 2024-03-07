@@ -44,8 +44,9 @@ namespace Bluetooth_Joystick_Test
 
         private byte[] receivedBytes_Raw;
         //private byte[] receivedBytes;
-        private readonly string ACTION_MODE = "Decode 0x1A";
-        //private readonly string ACTION_MODE = "Normal Mode";
+        //private readonly string ACTION_MODE = "Decode 0x1A";
+        //private readonly string ACTION_MODE = "Decode 0x1A";
+        private readonly string ACTION_MODE = "Normal Mode";
         private int SamplingRate_10ms;
         private int joystick_X_Output;
         private int joystick_Y_Output;
@@ -123,7 +124,7 @@ namespace Bluetooth_Joystick_Test
                 label_XOut.Text = joystick_X_Output.ToString();
                 label_YOut.Text = joystick_Y_Output.ToString();
                 label_ZOut.Text = joystick_Z_Output.ToString();
-
+                label_batteryLevel.Text = ((((rxByte[14] << 8) | rxByte[15])*3.3)/4096).ToString();
                 joystickChart.Button = (rxByte[1] & 1) == 1;
                 checkBox1.Checked = joystickChart.Button;
                 joystickChart.X_Input = joystick_X_Input - 2048;
@@ -337,17 +338,23 @@ namespace Bluetooth_Joystick_Test
             //}
             if (!(serialBT.IsOpen))
             {
-                RegistryKey key = Registry.LocalMachine.OpenSubKey("HARDWARE\\DEVICEMAP\\SERIALCOMM");
-                object portReg;
-                if (key != null)
+                if (checkBox_autoDetect.Checked == true)
                 {
-                    portReg = key.GetValue("\\Device\\BthModem0");
-                    serialBT.PortName = portReg.ToString();
-                    textBox_COMPort.Text = portReg.ToString();
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey("HARDWARE\\DEVICEMAP\\SERIALCOMM");
+                    object portReg;
+                    if (key != null)
+                    {
+                        portReg = key.GetValue("\\Device\\BthModem0");
+                        serialBT.PortName = portReg.ToString();
+                        textBox_COMPort.Text = portReg.ToString();
+                    }
                 }
+                else
+                { serialBT.PortName = textBox_COMPort.Text; }
+
                 try
                 {
-                    //serialBT.PortName = textBox_COMPort.Text;
+ 
                     serialBT.Open();
                     commandPacket[COMMAND_BYTE_INDEX] = CMD_TRANSMIT_RATE;
                     commandPacket[COMMAND_BYTE_INDEX + 1] = (byte)int.Parse(textBox_samplingRate.Text);
@@ -367,14 +374,14 @@ namespace Bluetooth_Joystick_Test
                     button_connect.Text = "Disconnect";
                     button_connect.BackColor = Color.Green;
                     return;
-                }
-                catch (System.Exception)
-                {
-                    MessageBox.Show("Retry");
-                }
-
-
             }
+                catch (System.Exception)
+            {
+                MessageBox.Show("Retry");
+            }
+
+
+        }
             else
             {
                 serialBT.Close();
