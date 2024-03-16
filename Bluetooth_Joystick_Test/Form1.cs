@@ -44,8 +44,9 @@ namespace Bluetooth_Joystick_Test
 
         private byte[] receivedBytes_Raw;
         //private byte[] receivedBytes;
-        private readonly string ACTION_MODE = "Decode 0x1A";
-        //private readonly string ACTION_MODE = "Normal Mode";
+        //private readonly string ACTION_MODE = "Decode 0x1A";
+        //private readonly string ACTION_MODE = "Decode 0x1A";
+        private readonly string ACTION_MODE = "Normal Mode";
         private int SamplingRate_10ms;
         private int joystick_X_Output;
         private int joystick_Y_Output;
@@ -75,8 +76,7 @@ namespace Bluetooth_Joystick_Test
 
         private void ReadReceivedData(byte[] receivedBytes_Raw) //ASMohsen
         {
-            //RegistryKey key = Registry.LocalMachine.OpenSubKey("HARDWARE\\DEVICEMAP\\SERIALCOMM")
-            //Microsoft.Win32.Registry.LocalMachine.OpenSubKey("\\Device\\BthModem0");
+
             switch (serial_Mode)
             {
                 case "Detection":
@@ -124,13 +124,16 @@ namespace Bluetooth_Joystick_Test
                 label_XOut.Text = joystick_X_Output.ToString();
                 label_YOut.Text = joystick_Y_Output.ToString();
                 label_ZOut.Text = joystick_Z_Output.ToString();
-
+                label_batteryLevel.Text = ((((rxByte[14] << 8) | rxByte[15])*3.3)/4096).ToString();
                 joystickChart.Button = (rxByte[1] & 1) == 1;
                 checkBox1.Checked = joystickChart.Button;
                 joystickChart.X_Input = joystick_X_Input - 2048;
                 joystickChart.Y_Input = joystick_Y_Input - 2048;
                 joystickChart.Z_Input = joystick_Z_Input - 2048;
+                for (int i = 0;i<16;i++)
+                {
 
+                }
 
                 //for (int i = 0; i < serialBT.ReceivedBytesThreshold; i++)
                 //{
@@ -325,61 +328,76 @@ namespace Bluetooth_Joystick_Test
         //}
         private void button_connect_Click(object sender, EventArgs e)
         {
-            bool isPortCorrect = true;
-            byte[] autoDetectionPacket = new byte[8] { 0x00, 0xAA, 0x55, 0x00, 0x00, 0x00, 0x00, 0xFF };
-            byte[] rxBytes = new byte[8];
-            foreach (string port in SerialPort.GetPortNames())
-            {
-                serialBT.Close();
-                textBox_COMPort.Text = port;
-                serialBT.PortName = port;
-                try
-                {
-                    serialBT.ReadTimeout = 10000;
-                    serialBT.WriteTimeout = 10000;
-                    serialBT.Open();
-                }
-                catch (System.Exception)
-                {
-                    continue;
-                }
-                if (serialBT.IsOpen)
-                {
-                    try
-                    {
-                        serialBT.Write(autoDetectionPacket, 0, autoDetectionPacket.Length);
-                    }
-                    catch (System.Exception)
-                    { }
-                    Thread.Sleep(5);
-                    try
-                    {
-                        serialBT.Read(rxBytes, 0, rxBytes.Length);
-                    }
-                    catch (System.Exception)
-                    { }
-                }
-                for (int i = 0; i < 8; i++)
-                {
-                    if (rxBytes[i] != autoDetectionPacket[i])
-                    {
-                        isPortCorrect = false;
-                        break;
-                    }
-                    else
-                        continue;
-                }
-                if (isPortCorrect)
-                {
-                    textBox_COMPort.Text = port;
-                    break;
-                }
-            }
+            
+            //bool isPortCorrect = true;
+            //byte[] autoDetectionPacket = new byte[8] { 0x00, 0xAA, 0x55, 0x00, 0x00, 0x00, 0x00, 0xFF };
+            //byte[] rxBytes = new byte[8];
+            //foreach (string port in SerialPort.GetPortNames())
+            //{
+            //    serialBT.Close();
+            //    textBox_COMPort.Text = port;
+            //    serialBT.PortName = port;
+            //    try
+            //    {
+            //        serialBT.ReadTimeout = 10000;
+            //        serialBT.WriteTimeout = 10000;
+            //        serialBT.Open();
+            //    }
+            //    catch (System.Exception)
+            //    {
+            //        continue;
+            //    }
+            //    if (serialBT.IsOpen)
+            //    {
+            //        try
+            //        {
+            //            serialBT.Write(autoDetectionPacket, 0, autoDetectionPacket.Length);
+            //        }
+            //        catch (System.Exception)
+            //        { }
+            //        Thread.Sleep(5);
+            //        try
+            //        {
+            //            serialBT.Read(rxBytes, 0, rxBytes.Length);
+            //        }
+            //        catch (System.Exception)
+            //        { }
+            //    }
+            //    for (int i = 0; i < 8; i++)
+            //    {
+            //        if (rxBytes[i] != autoDetectionPacket[i])
+            //        {
+            //            isPortCorrect = false;
+            //            break;
+            //        }
+            //        else
+            //            continue;
+            //    }
+            //    if (isPortCorrect)
+            //    {
+            //        textBox_COMPort.Text = port;
+            //        break;
+            //    }
+            //}
             if (!(serialBT.IsOpen))
             {
+                if (checkBox_autoDetect.Checked == true)
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey("HARDWARE\\DEVICEMAP\\SERIALCOMM");
+                    object portReg;
+                    if (key != null)
+                    {
+                        portReg = key.GetValue("\\Device\\BthModem0");
+                        serialBT.PortName = portReg.ToString();
+                        textBox_COMPort.Text = portReg.ToString();
+                    }
+                }
+                else
+                { serialBT.PortName = textBox_COMPort.Text; }
+
                 try
                 {
-                    serialBT.PortName = textBox_COMPort.Text;
+ 
                     serialBT.Open();
                     commandPacket[COMMAND_BYTE_INDEX] = CMD_TRANSMIT_RATE;
                     commandPacket[COMMAND_BYTE_INDEX + 1] = (byte)int.Parse(textBox_samplingRate.Text);
@@ -399,14 +417,14 @@ namespace Bluetooth_Joystick_Test
                     button_connect.Text = "Disconnect";
                     button_connect.BackColor = Color.Green;
                     return;
-                }
-                catch (System.Exception)
-                {
-                    MessageBox.Show("Retry");
-                }
-
-
             }
+                catch (System.Exception)
+            {
+                MessageBox.Show("Retry");
+            }
+
+
+        }
             else
             {
                 serialBT.Close();
@@ -535,26 +553,66 @@ namespace Bluetooth_Joystick_Test
         {
 
         }
-        private bool ledState = true;
+        private bool led1State = true;
+        private bool led2State = true;
+        private bool led3State = true;
         private void button_LED_Click(object sender, EventArgs e)
         {
+            
             if (serialBT.IsOpen)
             {
 
                 commandPacket[COMMAND_BYTE_INDEX] = CMD_LED;
-                if (ledState)
+                if(sender == button_LED1)
                 {
-                    commandPacket[COMMAND_BYTE_INDEX + 1] = 1;
-                    button_LED.BackColor = Color.Green;
-                }
-                else
-                {
-                    commandPacket[COMMAND_BYTE_INDEX + 1] = 0;
-                    button_LED.BackColor = SystemColors.Control;
+                    if (led1State)
+                    {
+                        commandPacket[COMMAND_BYTE_INDEX + 1] |= 1;
+                        button_LED1.BackColor = Color.Green;
+
+                    }
+                    else
+                    {
+                        commandPacket[COMMAND_BYTE_INDEX + 1] &= 0xFE;
+                        button_LED1.BackColor = SystemColors.Control;
+                    }
+                    led1State = !led1State;
 
                 }
+                else if (sender == button_LED2)
+                {
+                    if (led2State)
+                    {
+                        commandPacket[COMMAND_BYTE_INDEX + 1] |= (1<<1);
+                        button_LED2.BackColor = Color.Green;
+
+                    }
+                    else
+                    {
+                        commandPacket[COMMAND_BYTE_INDEX + 1] &= 0xFD;
+                        button_LED2.BackColor = SystemColors.Control;
+                    }
+                    led2State = !led2State;
+
+                }
+                else if (sender == button_LED3)
+                {
+                    if (led2State)
+                    {
+                        commandPacket[COMMAND_BYTE_INDEX + 1] |= (1 << 2);
+                        button_LED3.BackColor = Color.Green;
+
+                    }
+                    else
+                    {
+                        commandPacket[COMMAND_BYTE_INDEX + 1] &= 0xFB;
+                        button_LED3.BackColor = SystemColors.Control;
+                    }
+                    led3State = !led3State;
+
+                }
+
                 serialBT.Write(commandPacket, 0, COMMAND_PACKET_SIZE);
-                ledState = !ledState;
 
             }
         }

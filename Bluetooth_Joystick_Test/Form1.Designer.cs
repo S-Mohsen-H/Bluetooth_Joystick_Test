@@ -83,7 +83,7 @@
             this.button_applyFilterCoefficient = new System.Windows.Forms.Button();
             this.textBox_filterCoefficient = new System.Windows.Forms.TextBox();
             this.label_helpSamplingCoefficient = new System.Windows.Forms.Label();
-            this.button_LED = new System.Windows.Forms.Button();
+            this.button_LED2 = new System.Windows.Forms.Button();
             this.textBox_alarmPatternBin = new System.Windows.Forms.TextBox();
             this.textBox_alarmPatternHex = new System.Windows.Forms.TextBox();
             this.button_alarmBin = new System.Windows.Forms.Button();
@@ -94,7 +94,27 @@
             this.label_YOut = new System.Windows.Forms.Label();
             this.label_ZOut = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button_autoDetectCOMPort = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.Label_rxBytes = new System.Windows.Forms.Label();
+            this.button_LED1 = new System.Windows.Forms.Button();
+            this.button_LED3 = new System.Windows.Forms.Button();
+            this.checkBox_autoDetect = new System.Windows.Forms.CheckBox();
+            this.label_batteryLevel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox_COMPort
@@ -104,7 +124,7 @@
             this.textBox_COMPort.Name = "textBox_COMPort";
             this.textBox_COMPort.Size = new System.Drawing.Size(100, 27);
             this.textBox_COMPort.TabIndex = 1;
-            this.textBox_COMPort.Text = "COM11";
+            this.textBox_COMPort.Text = "COM5";
             this.textBox_COMPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button_connect
@@ -599,16 +619,16 @@
             this.label_helpSamplingCoefficient.TabIndex = 9;
             this.label_helpSamplingCoefficient.Text = "Enter the low-pass filter coefficient in percentage";
             // 
-            // button_LED
+            // button_LED2
             // 
-            this.button_LED.BackColor = System.Drawing.SystemColors.Control;
-            this.button_LED.Location = new System.Drawing.Point(529, 203);
-            this.button_LED.Name = "button_LED";
-            this.button_LED.Size = new System.Drawing.Size(75, 23);
-            this.button_LED.TabIndex = 17;
-            this.button_LED.Text = "LED";
-            this.button_LED.UseVisualStyleBackColor = false;
-            this.button_LED.Click += new System.EventHandler(this.button_LED_Click);
+            this.button_LED2.BackColor = System.Drawing.SystemColors.Control;
+            this.button_LED2.Location = new System.Drawing.Point(529, 203);
+            this.button_LED2.Name = "button_LED2";
+            this.button_LED2.Size = new System.Drawing.Size(75, 23);
+            this.button_LED2.TabIndex = 17;
+            this.button_LED2.Text = "LED 2";
+            this.button_LED2.UseVisualStyleBackColor = false;
+            this.button_LED2.Click += new System.EventHandler(this.button_LED_Click);
             // 
             // textBox_alarmPatternBin
             // 
@@ -713,29 +733,233 @@
             this.label_ZOut.TabIndex = 20;
             this.label_ZOut.Text = "Zout";
             // 
-            // button_autoDetectCOMPort
+            // label1
             // 
-            this.button_autoDetectCOMPort.Location = new System.Drawing.Point(223, 452);
-            this.button_autoDetectCOMPort.Name = "button_autoDetectCOMPort";
-            this.button_autoDetectCOMPort.Size = new System.Drawing.Size(126, 23);
-            this.button_autoDetectCOMPort.TabIndex = 21;
-            this.button_autoDetectCOMPort.Text = "Auto Detect Port";
-            this.button_autoDetectCOMPort.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(852, 422);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Byte 15";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(702, 422);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(43, 13);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Byte 12";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(652, 422);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Byte 11";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(502, 422);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 13);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "Byte 8";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(802, 422);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "Byte 14";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(452, 422);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(37, 13);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Byte 7";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(602, 422);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(43, 13);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "Byte 10";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(302, 422);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(37, 13);
+            this.label8.TabIndex = 28;
+            this.label8.Text = "Byte 4";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(752, 422);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(43, 13);
+            this.label9.TabIndex = 29;
+            this.label9.Text = "Byte 13";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(402, 422);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(37, 13);
+            this.label10.TabIndex = 30;
+            this.label10.Text = "Byte 6";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(552, 422);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(37, 13);
+            this.label11.TabIndex = 31;
+            this.label11.Text = "Byte 9";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(252, 422);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(37, 13);
+            this.label12.TabIndex = 32;
+            this.label12.Text = "Byte 3";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(352, 422);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(37, 13);
+            this.label13.TabIndex = 33;
+            this.label13.Text = "Byte 5";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(202, 422);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(37, 13);
+            this.label14.TabIndex = 34;
+            this.label14.Text = "Byte 2";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(102, 422);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(37, 13);
+            this.label15.TabIndex = 35;
+            this.label15.Text = "Byte 0";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(152, 422);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(37, 13);
+            this.label16.TabIndex = 36;
+            this.label16.Text = "Byte 1";
+            // 
+            // Label_rxBytes
+            // 
+            this.Label_rxBytes.AutoSize = true;
+            this.Label_rxBytes.Location = new System.Drawing.Point(3, 422);
+            this.Label_rxBytes.Name = "Label_rxBytes";
+            this.Label_rxBytes.Size = new System.Drawing.Size(81, 13);
+            this.Label_rxBytes.TabIndex = 11;
+            this.Label_rxBytes.Text = "Received bytes";
+            // 
+            // button_LED1
+            // 
+            this.button_LED1.BackColor = System.Drawing.SystemColors.Control;
+            this.button_LED1.Location = new System.Drawing.Point(448, 203);
+            this.button_LED1.Name = "button_LED1";
+            this.button_LED1.Size = new System.Drawing.Size(75, 23);
+            this.button_LED1.TabIndex = 17;
+            this.button_LED1.Text = "LED 1";
+            this.button_LED1.UseVisualStyleBackColor = false;
+            this.button_LED1.Click += new System.EventHandler(this.button_LED_Click);
+            // 
+            // button_LED3
+            // 
+            this.button_LED3.BackColor = System.Drawing.SystemColors.Control;
+            this.button_LED3.Location = new System.Drawing.Point(610, 203);
+            this.button_LED3.Name = "button_LED3";
+            this.button_LED3.Size = new System.Drawing.Size(75, 23);
+            this.button_LED3.TabIndex = 17;
+            this.button_LED3.Text = "LED 3";
+            this.button_LED3.UseVisualStyleBackColor = false;
+            this.button_LED3.Click += new System.EventHandler(this.button_LED_Click);
+            // 
+            // checkBox_autoDetect
+            // 
+            this.checkBox_autoDetect.AutoSize = true;
+            this.checkBox_autoDetect.Location = new System.Drawing.Point(607, 453);
+            this.checkBox_autoDetect.Name = "checkBox_autoDetect";
+            this.checkBox_autoDetect.Size = new System.Drawing.Size(80, 17);
+            this.checkBox_autoDetect.TabIndex = 37;
+            this.checkBox_autoDetect.Text = "checkBox2";
+            this.checkBox_autoDetect.UseVisualStyleBackColor = true;
+            // 
+            // label_batteryLevel
+            // 
+            this.label_batteryLevel.AutoSize = true;
+            this.label_batteryLevel.Location = new System.Drawing.Point(535, 37);
+            this.label_batteryLevel.Name = "label_batteryLevel";
+            this.label_batteryLevel.Size = new System.Drawing.Size(65, 13);
+            this.label_batteryLevel.TabIndex = 20;
+            this.label_batteryLevel.Text = "Battery ADC";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 522);
-            this.Controls.Add(this.button_autoDetectCOMPort);
+            this.Controls.Add(this.checkBox_autoDetect);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.label_ZOut);
             this.Controls.Add(this.label_YOut);
+            this.Controls.Add(this.label_batteryLevel);
             this.Controls.Add(this.label_XOut);
             this.Controls.Add(this.comboBox_alarmCountHex);
             this.Controls.Add(this.comboBox_alarmCountBin);
             this.Controls.Add(this.textBox_alarmPatternHex);
             this.Controls.Add(this.textBox_alarmPatternBin);
-            this.Controls.Add(this.button_LED);
+            this.Controls.Add(this.button_LED3);
+            this.Controls.Add(this.button_LED1);
+            this.Controls.Add(this.button_LED2);
             this.Controls.Add(this.label_byte15);
             this.Controls.Add(this.label_byte12);
             this.Controls.Add(this.label_byte11);
@@ -763,6 +987,7 @@
             this.Controls.Add(this.button_heartRate);
             this.Controls.Add(this.label_samplingRate);
             this.Controls.Add(this.label_Y);
+            this.Controls.Add(this.Label_rxBytes);
             this.Controls.Add(this.label_customMessage);
             this.Controls.Add(this.label_COMPort);
             this.Controls.Add(this.label_helpSamplingCoefficient);
@@ -853,7 +1078,7 @@
         private System.Windows.Forms.Button button_applyFilterCoefficient;
         private System.Windows.Forms.TextBox textBox_filterCoefficient;
         private System.Windows.Forms.Label label_helpSamplingCoefficient;
-        private System.Windows.Forms.Button button_LED;
+        private System.Windows.Forms.Button button_LED2;
         private System.Windows.Forms.TextBox textBox_alarmPatternBin;
         private System.Windows.Forms.TextBox textBox_alarmPatternHex;
         private System.Windows.Forms.Button button_alarmBin;
@@ -864,7 +1089,27 @@
         private System.Windows.Forms.Label label_YOut;
         private System.Windows.Forms.Label label_ZOut;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button button_autoDetectCOMPort;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label Label_rxBytes;
+        private System.Windows.Forms.Button button_LED1;
+        private System.Windows.Forms.Button button_LED3;
+        private System.Windows.Forms.CheckBox checkBox_autoDetect;
+        private System.Windows.Forms.Label label_batteryLevel;
     }
 }
 
